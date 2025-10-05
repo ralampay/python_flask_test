@@ -22,15 +22,18 @@ def app():
 def client(app):
     return app.test_client()
 
-@pytest.fixture
-def mock_user(app):
-    """Create and persist a fake user in the test DB."""
+@pytest.fixture(scope="session")
+def session(app):
     with app.app_context():
-         # Bind Factory Boy to the active SQLAlchemy session
-        UserFactory._meta.sqlalchemy_session = db.session
+        yield db.session
 
-        user = UserFactory()
-        db.session.add(user)
-        db.session.commit()
+@pytest.fixture
+def mock_user(session):
+    #  Bind Factory Boy to this active SQLAlchemy session
+    UserFactory._meta.sqlalchemy_session = session
 
-        return user
+    user = UserFactory()
+    session.add(user)
+    session.commit()
+
+    return user

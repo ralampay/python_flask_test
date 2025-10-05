@@ -4,9 +4,9 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from .routes import api
 from app.utils import json_response
 
+# --- Initialize extensions (but not bind yet) ---
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -15,8 +15,6 @@ def create_app(env=None):
 
     # enable CORS for all routes
     CORS(app)
-
-    app.register_blueprint(api)
 
     # --- Load database config ---
     config_path = os.path.join(os.path.dirname(__file__), "config", "database.yml")
@@ -49,6 +47,11 @@ def create_app(env=None):
 
     # Import models *after* db.init_app so migrations detect them
     from .models import User
+    from .routes import api
+    from .controllers.users_controller import users_bp
+
+    app.register_blueprint(api)
+    app.register_blueprint(users_bp)
 
     # Error handler: 404
     @app.errorhandler(404)
