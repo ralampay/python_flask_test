@@ -13,9 +13,19 @@ def create_app():
     # Error handler: 404
     @app.errorhandler(404)
     def not_found(e):
-        return {
-            "error": "Not found",
-            "message": str(e)
-        }, 404
+        return json_response(
+            status="error",
+            message="not found",
+            code=404
+        )
+
+    # Error handler: 500
+    @app.errorhandler(500)
+    def internal_error(e):
+        return json_response(
+            status="error",
+            message="internal server error",
+            code=500
+        )
 
     return app
