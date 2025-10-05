@@ -1,0 +1,14 @@
+default: &default
+  driver: sqlite
+  uri: sqlite:///instance/dev.db
+
+development:
+  <<: *default
+
+test:
+  driver: sqlite
+  uri: sqlite:///instance/test.db
+
+production:
+  driver: postgres
+  uri: sqlite:///instance/production.db

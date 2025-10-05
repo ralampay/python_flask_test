@@ -9,5 +9,8 @@ pip install \
     flask \
     flask-cors \
     pytest \
-    pytest-flask
+    pytest-flask \
+    flask_sqlalchemy \
+    flask_migrate \
+    pyyaml
 ```

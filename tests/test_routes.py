@@ -1,5 +1,5 @@
 def test_home_route(client):
-    """Test the GET /api/ route"""
+    """Test the GET / route"""
     response = client.get("/")
     json_data = response.get_json()
 
@@ -9,7 +9,7 @@ def test_home_route(client):
 
 
 def test_echo_route(client):
-    """Test the POST /api/echo route"""
+    """Test the POST /echo route"""
     payload = {"name": "Raphael"}
     response = client.post("/echo", json=payload)
     json_data = response.get_json()

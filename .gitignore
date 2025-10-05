@@ -84,11 +84,23 @@ desktop.ini
 .env.test
 
 # -----------------------------------------------------------------------------
+# Flask-specific
+# -----------------------------------------------------------------------------
+
+# Instance folder — ignore databases, keep folder
+instance/*
+!instance/.gitkeep  # keep empty dir placeholder
+!instance/README.md # optional docs
+
+# Migrations — keep migration scripts but ignore cache
+!migrations/
+migrations/versions/__pycache__/
+migrations/*.pyc
+
+# -----------------------------------------------------------------------------
 # Custom Project Specific
 # -----------------------------------------------------------------------------
 # SQLite and migration folders
-migrations/
-instance/
 __pypackages__/
 
 # Temporary files
