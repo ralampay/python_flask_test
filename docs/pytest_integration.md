@@ -66,3 +66,13 @@ def test_404_route(client):
 ```bash
 pytest -v
 ```
+
+## Cleaner with `pytest.ini`
+
+1. Create a file `pytest.ini` at project root:
+
+```
+[pytest]
+testpaths = tests
+pythonpath = .
+```
