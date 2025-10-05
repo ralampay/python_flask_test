@@ -60,6 +60,18 @@ config_path = os.path.join(os.path.dirname(__file__), "config", "database.yml")
 with open(config_path, "r") as f:
     db_configs = yaml.safe_load(f)
 
+
+# --- Fix relative SQLite paths ---
+if db_uri.startswith("sqlite:///"):
+    # Remove 'sqlite:///' prefix to get relative file path
+    relative_path = db_uri.replace("sqlite:///", "")
+    # Resolve absolute path relative to the Flask app root
+    abs_path = os.path.join(app.root_path, "..", relative_path)
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(abs_path), exist_ok=True)
+    # Rebuild full absolute URI
+    db_uri = f"sqlite:///{abs_path}"
+
 # Choose environment
 env = env or os.getenv("FLASK_ENV", "development")
 db_uri = db_configs[env]["uri"]

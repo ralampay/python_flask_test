@@ -26,6 +26,18 @@ def create_app(env=None):
     # Choose environment
     env = env or os.getenv("FLASK_ENV", "development")
     db_uri = db_configs[env]["uri"]
+    # --- Fix relative SQLite paths ---
+    if db_uri.startswith("sqlite:///"):
+        # Remove 'sqlite:///' prefix to get relative file path
+        relative_path = db_uri.replace("sqlite:///", "")
+        # Resolve absolute path relative to the Flask app root
+        abs_path = os.path.join(app.root_path, "..", relative_path)
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(abs_path), exist_ok=True)
+        # Rebuild full absolute URI
+        db_uri = f"sqlite:///{abs_path}"
+
+    print("Using database:", db_uri)  # ✅ confirm full absolute path
 
      # --- Apply configuration ---
     app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
@@ -34,6 +46,9 @@ def create_app(env=None):
     # --- Initialize extensions ---
     db.init_app(app)
     migrate.init_app(app, db)
+
+    # Import models *after* db.init_app so migrations detect them
+    from .models import User
 
     # Error handler: 404
     @app.errorhandler(404)
