@@ -1,0 +1,97 @@
+# -----------------------------------------------------------------------------
+# Python Flask Web Development - .gitignore
+# -----------------------------------------------------------------------------
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+ENV/
+venv.bak/
+pip-wheel-metadata/
+
+# Pyenv
+.python-version
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Flask instance folder
+instance/
+*.db
+*.sqlite3
+
+# Logs and runtime
+*.log
+*.pid
+*.seed
+*.out
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+test-results/
+
+# Jupyter notebooks
+.ipynb_checkpoints
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS / system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env.local
+.env.production
+.env.development
+.env.test
+
+# -----------------------------------------------------------------------------
+# Custom Project Specific
+# -----------------------------------------------------------------------------
+# SQLite and migration folders
+migrations/
+instance/
+__pypackages__/
+
+# Temporary files
+tmp/
+*.bak
+*.swp
