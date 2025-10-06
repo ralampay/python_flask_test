@@ -1,5 +1,3 @@
-from .. import db
-
 # Import individual models here
 from .user import User
 
