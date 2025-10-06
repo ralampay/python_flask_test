@@ -46,7 +46,7 @@ def create_app(env=None):
     migrate.init_app(app, db)
 
     # Import models *after* db.init_app so migrations detect them
-    from .models import User
+    from app import models
     from .routes import api
     from .controllers.users_controller import users_bp
 
