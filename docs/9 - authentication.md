@@ -21,3 +21,11 @@ To attach this to a controller route defined by a blueprint, we can create a met
 def authenticate_routes():
     return authenticate_user() 
 ```
+
+To pass authentication to a test, we can include it as headers:
+
+```python
+headers = { "Authorization: Bearer some_token" }
+
+client.get("/users", headers=headers)
+```
